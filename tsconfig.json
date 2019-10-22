@@ -17,7 +17,15 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "backdrop": [
+        "dist/backdrop"
+      ],
+      "backdrop/*": [
+        "dist/backdrop/*"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,

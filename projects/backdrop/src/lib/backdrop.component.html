@@ -1,0 +1,29 @@
+<ng-container *ngIf="title | async as backdropTitle">
+  <ng-container *ngIf="backdropTitle != null">
+    <div
+      *ngIf="
+        state?.value === 'up';
+        then backdropUpHeader;
+        else backdropDownHeader
+      "
+    ></div>
+    <ng-template #backdropUpHeader>
+      <header>
+        <span>{{ backdropTitle }}</span>
+        <i class="material-icons" tabindex="0" (click)="hide()">expand_more</i>
+      </header>
+    </ng-template>
+    <ng-template #backdropDownHeader>
+      <header class="clickable" (click)="show()">
+        <span>{{ backdropTitle }}</span>
+        <i class="material-icons">expand_less</i>
+      </header>
+    </ng-template>
+  </ng-container>
+</ng-container>
+
+<div class="subheader-divider" *ngIf="options?.divider"></div>
+
+<div class="content-body">
+  <ng-content></ng-content>
+</div>

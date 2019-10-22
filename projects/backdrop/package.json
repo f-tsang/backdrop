@@ -1,0 +1,11 @@
+{
+  "name": "ft-backdrop",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/animations": "^8.0.0",
+    "@angular/common": "^8.0.0",
+    "@angular/core": "^8.0.0",
+    "@ngrx/store": "^8.4.0",
+    "rxjs": "~6.4.0"
+  }
+}

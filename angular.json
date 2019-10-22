@@ -2,5 +2,41 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
-  "projects": {}
+  "projects": {
+    "backdrop": {
+      "projectType": "library",
+      "root": "projects/backdrop",
+      "sourceRoot": "projects/backdrop/src",
+      "prefix": "ft",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/backdrop/tsconfig.lib.json",
+            "project": "projects/backdrop/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/backdrop/src/test.ts",
+            "tsConfig": "projects/backdrop/tsconfig.spec.json",
+            "karmaConfig": "projects/backdrop/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/backdrop/tsconfig.lib.json",
+              "projects/backdrop/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }},
+  "defaultProject": "backdrop"
 }

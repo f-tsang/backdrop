@@ -1,27 +1,31 @@
 # FtBackdrop
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.10.
+A backdrop component for Angular, inspired by [Material Design](https://material.io/components/backdrop).
 
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+**Note**: Was previously used as a shared component before being moved to its own library. Some styles (i.e. CSS variables defining colours) can be safely overriden and will be removed in later iterations.
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Dependencies:
 
-## Running unit tests
+- Angular
+- RxJS
+- NgRx Store
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running end-to-end tests
+## Install
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+`yarn add /PATH_TO_FOLDER/dist/backdrop/`
 
-## Further help
+## Usage
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+```html
+<!-- Back layer content -->
+
+<ft-backdrop>
+  <!-- Front layer content -->
+</ft-backdrop>
+```
+
+_For the best results, the backdrop should be styled to, or fit in a container, that fills to the bottom of the screen._

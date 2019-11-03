@@ -1,48 +1,58 @@
+$margin-top: var(--backdrop-margin, 0); // 0.5rem;
+$gap-size: var(--backdrop-gap, 1rem);
+
+$background-colour: var(--backdrop-background-colour, #f5f5f5);
+$divider-colour: var(--backdrop-divider-colour, #0000000f);
+$text-colour: var(--backdrop-text-colour, #000000de);
+$text-alternate-colour: var(--backdrop-text-alternate-colour, #777777);
+
 :host {
-  --primary-colour: #f5f5f5;
-  --divider-colour: #0000000f;
-  --foreground-text-colour: #000000de;
-  --foreground-alternate-colour: #777777;
-  --gap-size: 1rem;
-  margin: 0.5rem 0 0 0;
+  margin: $margin-top 0 0 0;
   display: grid;
-  grid-template-areas: 'head' 'body';
-  grid-template-rows: 3rem 1fr;
+  grid-template-areas: 'body';
+  grid-template-rows: 1fr;
   grid-template-columns: 1fr;
-  height: calc(100% - 0.5rem);
+  height: calc(100% - $margin-top);
   overflow: hidden;
-  color: var(--foreground-text-colour);
+  color: $text-colour;
   border-radius: 1rem 1rem 0 0;
-  background: var(--primary-colour);
+  background: $background-colour;
+
+  &.backdrop-header {
+    grid-template-areas: 'head' 'body';
+    grid-template-rows: 3rem 1fr;
+  }
 }
 header {
   grid-area: head;
-  padding: 0.75rem 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  padding: calc($gap-size / 2) $gap-size;
+  display: grid;
+  grid-template-areas: 'title controls';
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr max-content;
+  gap: $gap-size;
 
   > :first-child {
-    padding: 0 var(--gap-size);
-    font-size: 0.875rem;
-    color: var(--foreground-alternate-colour);
-    flex: 1;
+    grid-area: title;
+    align-self: center;
+    font-size: 87.5%;
+    color: $text-alternate-colour;
   }
   > :last-child {
-    margin-right: var(--gap-size);
+    grid-area: controls;
+    align-self: center;
     cursor: pointer;
   }
 }
 .clickable {
   cursor: pointer;
 }
-// TBD
 .subheader-divider {
-  margin: 0 var(--gap-size);
+  margin: 0 $gap-size;
   display: block;
-  width: calc(100% - var(--gap-size) * 2);
+  width: calc(100% - $gap-size * 2);
   height: 1px;
-  background: var(--divider-colour);
+  background: $divider-colour;
 }
 .content-body {
   grid-area: body;

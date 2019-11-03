@@ -8,7 +8,7 @@ import {
   OnDestroy
 } from '@angular/core'
 import {Store} from '@ngrx/store'
-import {filter, pluck, take} from 'rxjs/operators'
+import {delay, filter, map, pluck, take} from 'rxjs/operators'
 
 import {
   BackdropState,
@@ -29,7 +29,7 @@ import {
     trigger('translateUpDown', [
       state('up', style({transform: 'translateY(0)'})),
       state('down', style({transform: 'translateY(calc({{ translateY }}))'}), {
-        params: {translateY: '100% - 48px'}
+        params: {translateY: '100% - 3rem'}
       }),
       transition('void => down', [
         style({transform: 'translateY(100%)'}),
@@ -40,20 +40,26 @@ import {
   ]
 })
 export class BackdropComponent implements AfterViewInit, OnDestroy {
-  @Input()
-  options = {divider: false}
+  // TODO - Inputs to set CSS variables
+  // TODO - set options to apply properties
+  @Input() options = {
+    divider: false
+  }
+  @HostBinding('class.backdrop-header') hasTitle = false
   title = this.store.select(getTitle)
 
   private animationState: {value: 'up' | 'down'; params: object}
-  private subscription = this.store
+  private animationStateSub = this.store
     .select(getAnimationState)
-    .subscribe(animationState =>
-      Promise.resolve().then(() => (this.animationState = animationState))
-    )
+    .pipe(delay(0))
+    .subscribe(animationState => (this.animationState = animationState))
+  private titleSub = this.title
+    .pipe(map(Boolean))
+    .subscribe(hasTitle => (this.hasTitle = hasTitle))
 
   constructor(private store: Store<BackdropState>) {}
   ngAfterViewInit() {
-    // Show backdrop (default).
+    // Show backdrop (default setting).
     this.store
       .select(getAnimationParams)
       .pipe(
@@ -64,7 +70,8 @@ export class BackdropComponent implements AfterViewInit, OnDestroy {
       .subscribe(this.show.bind(this))
   }
   ngOnDestroy() {
-    this.subscription.unsubscribe()
+    this.titleSub.unsubscribe()
+    this.animationStateSub.unsubscribe()
   }
 
   show() {

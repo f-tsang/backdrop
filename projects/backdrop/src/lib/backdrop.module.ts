@@ -6,7 +6,7 @@ import {
   ActionTypes,
   BackdropState,
   HideBackdrop,
-  selectBackdrop as featureName,
+  selectBackdrop,
   SetBackdropTitle,
   ShowBackdrop
 } from './backdrop'
@@ -14,21 +14,18 @@ import {BackdropComponent} from './backdrop.component'
 
 @NgModule({
   declarations: [BackdropComponent],
-  imports: [CommonModule, StoreModule.forFeature(featureName, backdropReducer)],
+  imports: [CommonModule, StoreModule.forFeature(selectBackdrop, reducer)],
   exports: [BackdropComponent]
 })
 export class BackdropModule {}
 
 const initialState: BackdropState = {
-  title: '',
+  title: null,
   position: 'down',
   isAnimating: false,
   params: {translateY: '100%'}
 }
-export function backdropReducer(
-  state = initialState,
-  action: Action
-): BackdropState {
+export function reducer(state = initialState, action: Action): BackdropState {
   switch (action.type) {
     case ActionTypes.SetBackdropTitle: {
       const {title} = action as SetBackdropTitle

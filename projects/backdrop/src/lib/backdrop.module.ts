@@ -23,13 +23,14 @@ const initialState: BackdropState = {
   title: null,
   position: 'down',
   isAnimating: false,
+  controlsHidden: false,
   params: {translateY: '100%'}
 }
 export function reducer(state = initialState, action: Action): BackdropState {
   switch (action.type) {
     case ActionTypes.SetBackdropTitle: {
-      const {title} = action as SetBackdropTitle
-      return {...state, title}
+      const {title, hideControls} = action as SetBackdropTitle
+      return {...state, title, controlsHidden: hideControls}
     }
     case ActionTypes.ShowBackdrop: {
       const {params} = action as ShowBackdrop

@@ -10,7 +10,13 @@
     <ng-template #backdropUpHeader>
       <header>
         <span>{{ backdropTitle }}</span>
-        <i class="material-icons" tabindex="0" (click)="hide()">expand_more</i>
+        <i
+          class="material-icons"
+          tabindex="0"
+          *ngIf="(controlsHidden | async) == false"
+          (click)="hide()"
+          >expand_more</i
+        >
       </header>
     </ng-template>
     <ng-template #backdropDownHeader>

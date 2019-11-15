@@ -38,7 +38,7 @@ header {
     font-size: 87.5%;
     color: $text-alternate-colour;
   }
-  > :last-child {
+  > :last-child:not(:only-child) {
     grid-area: controls;
     align-self: center;
     cursor: pointer;

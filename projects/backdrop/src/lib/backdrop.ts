@@ -10,7 +10,7 @@ export const enum ActionTypes {
 }
 export class SetBackdropTitle implements Action {
   readonly type = ActionTypes.SetBackdropTitle
-  constructor(public title: string) {}
+  constructor(public title: string, public hideControls?: boolean) {}
 }
 export class ShowBackdrop implements Action {
   readonly type = ActionTypes.ShowBackdrop
@@ -33,6 +33,7 @@ export interface BackdropState {
   title: string
   position: 'up' | 'down'
   isAnimating: boolean
+  controlsHidden: boolean
   params?: object // Ex. {translateY: '100% - 48px'}
 }
 export const selectBackdrop = 'backdrop'
@@ -55,4 +56,8 @@ export const getAnimationParams = createSelector(
 export const getAnimationState = createSelector(
   selectBackdropState,
   ({position: value, params}) => ({value, params})
+)
+export const getControlsHidden = createSelector(
+  selectBackdropState,
+  ({controlsHidden}) => controlsHidden
 )

@@ -22,6 +22,7 @@ import {
   DoneAnimating,
   getAnimationParams,
   getAnimationState,
+  getControlsHidden,
   getTitle,
   HideBackdrop,
   ShowBackdrop,
@@ -54,6 +55,7 @@ export class BackdropComponent implements AfterViewInit, OnDestroy {
   }
   @HostBinding('class.backdrop-header') hasTitle = false
   title = this.store.select(getTitle)
+  controlsHidden = this.store.select(getControlsHidden)
 
   private animationState: {value: 'up' | 'down'; params: object}
   private animationStateSub = this.store

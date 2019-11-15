@@ -1,6 +1,6 @@
 {
   "name": "ft-backdrop",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "peerDependencies": {
     "@angular/animations": "^8.0.0",
     "@angular/common": "^8.0.0",

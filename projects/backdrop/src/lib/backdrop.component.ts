@@ -1,4 +1,11 @@
-import {animate, state, style, transition, trigger} from '@angular/animations'
+import {
+  animate,
+  AnimationEvent,
+  state,
+  style,
+  transition,
+  trigger
+} from '@angular/animations'
 import {
   AfterViewInit,
   Component,
@@ -81,13 +88,13 @@ export class BackdropComponent implements AfterViewInit, OnDestroy {
     this.store.dispatch(new HideBackdrop())
   }
 
-  @HostListener('(@translateUpDown.start)')
-  animationStart() {
-    this.store.dispatch(new StartAnimating())
+  @HostListener('@translateUpDown.start', ['$event'])
+  animationStart({totalTime, toState, fromState}: AnimationEvent) {
+    this.store.dispatch(new StartAnimating({totalTime, toState, fromState}))
   }
-  @HostListener('(@translateUpDown.done)')
-  anmiationDone() {
-    this.store.dispatch(new DoneAnimating())
+  @HostListener('@translateUpDown.done', ['$event'])
+  animationDone({totalTime, toState, fromState}: AnimationEvent) {
+    this.store.dispatch(new DoneAnimating({totalTime, toState, fromState}))
   }
 
   @HostBinding('@translateUpDown')

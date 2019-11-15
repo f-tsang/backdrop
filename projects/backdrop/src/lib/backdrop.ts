@@ -1,3 +1,4 @@
+import {AnimationEvent} from '@angular/animations'
 import {Action, createFeatureSelector, createSelector} from '@ngrx/store'
 
 export const enum ActionTypes {
@@ -21,9 +22,11 @@ export class HideBackdrop implements Action {
 }
 export class StartAnimating implements Action {
   readonly type = ActionTypes.StartAnimating
+  constructor(public event?: Partial<AnimationEvent>) {}
 }
 export class DoneAnimating implements Action {
   readonly type = ActionTypes.DoneAnimating
+  constructor(public event?: Partial<AnimationEvent>) {}
 }
 
 export interface BackdropState {
@@ -36,10 +39,7 @@ export const selectBackdrop = 'backdrop'
 export const selectBackdropState = createFeatureSelector<BackdropState>(
   selectBackdrop
 )
-export const getTitle = createSelector(
-  selectBackdropState,
-  ({title}) => title
-)
+export const getTitle = createSelector(selectBackdropState, ({title}) => title)
 export const getPosition = createSelector(
   selectBackdropState,
   ({position}) => position
